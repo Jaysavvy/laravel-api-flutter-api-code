@@ -12,6 +12,8 @@ use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */
@@ -25,7 +27,8 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        return new CategoryResource(Category::create($request->validated()));
+        $category = $request->user()->categories()->create($request->validated());
+        return new CategoryResource($category);
     }
 
     /**

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */
@@ -23,7 +25,8 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        return TransactionResource::collection(Transaction::all());
+        $transaction = $request->user()->transactions()->create($request->validated());
+        return new TransactionResource($transaction);
     }
 
     /**
